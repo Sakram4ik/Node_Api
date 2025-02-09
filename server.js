@@ -13,12 +13,18 @@ const server = http.createServer((req, res) =>{
     if (req.url == '/jokes' && req.method == 'POST'){
         addJoke(req, res)
     }
+    if(req.url.startsWith('/like')){
+        like(req, res)
+    }
+    if(req.url.startsWith('/unlikes')){
+        unlike(req, res)
+    }
 
 })
 
 server.listen(3000)
 
-function getAllJokes(req, res){
+function getAllJokes(req, res){ 
     let dir = fs.readdirSync(dataPath)
     let allJokes = []
     for(let i = 0; i < dir.length; i++){
@@ -46,5 +52,35 @@ function addJoke(req, res){
         let filePath = path.join(dataPath, fileName)
         fs.writeFileSync(filePath, JSON.stringify(joke))
     })
+    res.end()
+}
+
+function like(req, res){
+    const url = require('url')
+    const params = url.parse(req.url, true).query;
+    let id = params.id
+    if(id){
+        let filePath = path.join(dataPath, id+".json")
+        let file = fs.readFileSync(filePath)
+        let jokeJSON = Buffer.from(file).toString()
+        let joke = JSON.parse(jokeJSON)
+        joke.likes++;
+        fs.writeFileSync(filePath, JSON.stringify(joke)) 
+    }
+    res.end()
+}
+
+function unlike(req, res){
+    const url = require('url')
+    const params = url.parse(req.url, true).query;
+    let id = params.id
+    if(id){
+        let filePath = path.join(dataPath, id+".json")
+        let file = fs.readFileSync(filePath)
+        let jokeJSON = Buffer.from(file).toString()
+        let joke = JSON.parse(jokeJSON)
+        joke.unlikes++;
+        fs.writeFileSync(filePath, JSON.stringify(joke)) 
+    }
     res.end()
 }
