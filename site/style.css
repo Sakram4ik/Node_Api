@@ -1,0 +1,52 @@
+body{
+    background: url('https://github.com/blacksempai/robojoke-website-example/blob/main/background.jpg?raw=true');
+    height: 100vh;
+}
+header{
+    background: url('https://raw.githubusercontent.com/blacksempai/robojoke-website-example/e7ae56742ea193f552d3e29227e563f87b0d248e/header.svg');
+    background-size: cover;
+    background-position: bottom;
+    min-height: 200px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+main{
+    background: url('https://raw.githubusercontent.com/blacksempai/robojoke-website-example/e7ae56742ea193f552d3e29227e563f87b0d248e/main.svg');
+    background-size: cover;
+    background-position: top;
+    height: 60vh;
+}
+.logoImg{
+    max-height: 120px;
+    margin-top: -50px;
+}
+.title{
+    margin-top: -10px;
+    color: whitesmoke;
+    font-family:fantasy;
+    letter-spacing: 10px;
+    font-size: 80px;
+}
+.container{
+    display: grid;
+    grid-template-columns: repeat(2, minmax(100px, 50%));
+    grid-template-rows: repeat(2, minmax(100px, 50%));
+    gap: 20px;
+    margin-top: 50px;
+}
+.rate{
+    display: flex;
+    justify-content: space-between;
+    
+}
+.like{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.dislike{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
